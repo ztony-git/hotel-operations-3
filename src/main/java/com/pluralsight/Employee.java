@@ -1,5 +1,7 @@
 package com.pluralsight;
 
+import java.time.LocalTime;
+
 /**
  * Employee (Workbook 4a, Section 2-2 Creating Classes, Exercise 2)
  *
@@ -59,9 +61,20 @@ public class Employee {
         startTime = time;
     }
 
+    public void punchIn() {
+        LocalTime now = LocalTime.now();
+        startTime = now.getHour() + (double) now.getMinute() / 60;
+    }
     // Shift over: add its length to the total and clear the start time
     public void punchOut(double time) {
         double duration = time - startTime;
+        hoursWorked += duration;
+        startTime = 0;
+    }
+
+    public void punchOut() {
+        LocalTime now = LocalTime.now();
+        double duration = (now.getHour() + (double) now.getMinute() / 60) - startTime;
         hoursWorked += duration;
         startTime = 0;
     }
