@@ -9,39 +9,24 @@ package com.pluralsight;
  * all regular, 262.5 at 15.00 an hour.
  */
 public class Main {
-    public static void main(String[] args) {
-        // Create a new room with two beds and a price of $100 per night
-        Room room = new Room(2, 100.00);
-
-        // Check in a guest and mark the room as dirty
-        room.checkIn();
-        System.out.println("Room is occupied: " + room.isOccupied());
-        System.out.println("Room is dirty: " + room.isDirty());
-
-        // Guest checks out and room is cleaned
-        room.checkOut();
-        System.out.println("Room is occupied: " + room.isOccupied());
-        room.cleanRoom();
-        System.out.println("Room is dirty: " + room.isDirty());
-
+    public static void main(String[] args) throws InterruptedException {
         // Create a new employee and punch in
         Employee employee = new Employee(1, "John Doe", "Housekeeping", 15.00);
-        employee.punchIn(9.0);
+        employee.punchIn();
 
-        // Employee works for 8.5 hours and punches out
-        employee.punchOut(17.5);
+        Thread.sleep(10000);
+        employee.punchOut();
         System.out.println("Hours worked: " + employee.getHoursWorked());
         System.out.println("Total pay: " + employee.getTotalPay());
         System.out.println("Regular hours: " + employee.getRegularHours());
         System.out.println("Overtime hours: " + employee.getOvertimeHours());
 
-        // Employee punches time card again (BONUS): first call is the punch in,
-        // second call is the punch out
-        employee.punchTimeCard(9.0);
-        employee.punchTimeCard(18.0);
-        System.out.println("Hours worked: " + employee.getHoursWorked());
-        System.out.println("Total pay: " + employee.getTotalPay());
-        System.out.println("Regular hours: " + employee.getRegularHours());
-        System.out.println("Overtime hours: " + employee.getOvertimeHours());
+        Hotel hotel = new Hotel("Grand Plaza", 10, 40);
+        System.out.println(hotel.bookRoom(6, true));
+        System.out.println("Hotel booked: " + hotel.getAvailableSuites());
+        System.out.println(hotel.bookRoom(29, false));
+        System.out.println("Hotel booked: " + hotel.getAvailableRooms());
+        System.out.println(hotel.bookRoom(29, false));
+        System.out.println("Hotel booked: " + hotel.getAvailableRooms());
     }
 }
